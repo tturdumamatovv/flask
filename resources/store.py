@@ -20,7 +20,9 @@ class Store(MethodView):
 
     def delete(self, store_id):
         store = StoreModel.get_or_404(store_id)
-        raise NotImplementedError("Delating a store is not implemented.")
+        db.session.delete(store)
+        db.session.commit()
+        return {"message": "Store deleted."}
 
 
 @blp.route("/store")
